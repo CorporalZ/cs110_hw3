@@ -1,53 +1,25 @@
-function createSpaces(x,str){
-	if(x==0){
-		return str;
+function GetLine(spaces,stars,str){
+	for(cc=0;cc<spaces;++cc){
+		str+=" ";
 	}
-	str+=" ";
-	return createSpaces(--x,str)
-}
-
-function createStars(x,str){
-	if(x==0){
-		return str;
+	for(bb=0;bb<stars;++bb){
+		str+="*";
 	}
-	str+="*";
-	return createStars(--x,str)
+	return str;
 }
-
-function draw(spaces,stars){
-	if(spaces == 0){
-		return 0;
+function diamond(number){
+	if(number%2==0)
+		++number;
+	const pyramid_1 = (number+1)/2;
+	for(ii=[pyramid_1-1,1];ii[0]>-1;true){
+		console.log(GetLine(ii[0],ii[1],""));
+		--ii[0];
+		ii[1]+=2;
 	}
-	console.log(createSpaces(spaces,"")+createStars(stars,""));
-	draw(spaces-1,stars+2);
+	for(qq=[1,number-2];qq[1]>0;true){
+		console.log(GetLine(qq[0],qq[1],""));
+		++qq[0];
+		qq[1]-=2;
+	} 
 }
-function _draw(spaces,stars){
-	if(stars <= 0){
-		return 0;
-	}
-	console.log(createSpaces(spaces,"")+createStars(stars,""));
-	_draw(spaces+1,stars-2);
-}
-
-function triangleStars(x){
-	draw(x-1,1);
-}
-
-function makeString(a,b){
-	for(ii=0;ii<a;ii++){
-		b+="*";
-	}
-	return b;
-}
-
-const diamond = function(n) {
-	if(n%2 === 0) {
-		n = n + 1;
-	}
-	const x=(n-1)/2;
-	draw(x,1);
-	console.log(makeString(n,""));
-	const x1=n-3;
-	_draw(1,x1+1);
-};
 diamond(5);
